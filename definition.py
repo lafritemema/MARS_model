@@ -2,7 +2,6 @@
 import abc
 from typing import Dict, List
 
-# MODIFGEN from .__init__ import *
 import model
 
 from .movement import Movement
@@ -55,13 +54,11 @@ class Path(Definition):
         ut = serialize_movement['ut']
         # get the corresponding equipment
         ut = model.EQUIPMENT['EFFECTOR'][ut]
-        # MODIFGEN ut = EQUIPMENT['EFFECTOR'][ut]
 
         # get the user frame from dict
         uf = serialize_movement['uf']
         # get the corresponding reference
         uf = model.REFERENCE['FRAME'][uf]
-        #MODIFGEN uf = REFERENCE['FRAME'][uf]
 
         movements = []
 
@@ -171,11 +168,9 @@ class Probing(Definition):
         try:
             ut = serialize_definition['ut']
             ut = model.EQUIPMENT['EFFECTOR'][ut]
-            # MODIFGEN ut = EQUIPMENT['EFFECTOR'][ut]
 
             uf = serialize_definition['uf']
             uf = model.REFERENCE['FRAME'][uf]
-            # MODIFGEN uf = REFERENCE['FRAME'][uf]
 
             movement = Movement.parse(serialize_definition['movement'])
             return Probing(ut, uf, movement)
@@ -211,7 +206,6 @@ class Manipulation(Definition):
         operation = manipulation_definition['manipulation']
 
         equipement = model.EQUIPMENT[eq_type][eq_ref]
-        # MODIFGEN equipement = EQUIPMENT[eq_type][eq_ref]
 
         manip_type = Operation[operation]
 
