@@ -108,11 +108,28 @@ class Drilling(Definition):
     # TODO add other parameters in the futur: DrillingCycleLimit, ClampingCycleLimit, TemperatureAlarm, CurrentAlarm
     # update __init__ parse and to_dict
 
-    def __init__(self, speed:int, feed:int, peak:bool):
+    """function to init Drilling operation object
+    Args:
+      speed (int): drill rotation speed in rpm
+      feed (int) : drill feed in mm/tr
+      peak_frequency (float): peak vibration frequency in Hz
+      peak_amplitude (float): peak movement amplitude in mm
+      clamp_weight (float): clampling weight in kg
+      drill_thickness (float) : thickness of the hole in mm
+    """
+    def __init__(self,
+                 speed:int,
+                 feed:int,
+                 peak_frequency:float,
+                 peak_amplitude:float,
+                 clamp_weight:float,
+                 drill_thickness:float):
         self.__speed = speed
         self.__feed = feed
-        self.__peak = peak
-
+        self.__drill_thickness = drill_thickness
+        self.__peak_frequency = peak_frequency
+        self.__peak_amplitude = peak_amplitude
+        self.__clamp_weight = clamp_weight
 
     @property
     def speed(self):
@@ -123,25 +140,46 @@ class Drilling(Definition):
         return self.__feed
 
     @property
-    def peak(self):
-        return self.__peak
+    def peak_amplitude(self):
+        return self.__peak_amplitude
+    
+    @property
+    def peak_frequency(self):
+        return self.__peak_frequency
+    
+    @property
+    def drill_thickness(self):
+        return self.__drill_thickness
+
+    @property
+    def clamp_weight(self):
+        return self.__clamp_weight
 
     @staticmethod
     def parse(serialize_definition:Dict):
     
         speed = serialize_definition['speed']
         feed = serialize_definition['feed']
-        peak = serialize_definition['peak']
-
+        peak_frequency = serialize_definition['peak_frequency']
+        peak_amplitude = serialize_definition['peak_amplitude']
+        clamp_weight = serialize_definition['clamp_weight']
+        drill_thickness = serialize_definition['drill_thickness']
+        
         return Drilling(speed,
                         feed,
-                        peak)
+                        peak_frequency,
+                        peak_amplitude,
+                        clamp_weight,
+                        drill_thickness)
 
     def to_dict(self):
         return {
             'speed' : self.__speed,
             'feed' : self.__feed,
-            'peak' : self.__peak
+            'peak_frequency' : self.__peak_frequency,
+            'peak_amplitude' : self.__peak_amplitude,
+            'clamp_weight' : self.__clamp_weight,
+            'drill_thickness' : self.__drill_thickness
         }
         
 
