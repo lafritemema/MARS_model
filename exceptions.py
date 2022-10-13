@@ -1,11 +1,7 @@
 
 from exceptions import BaseException
-from utils import GetItemEnum
-from enum import Enum
 
-class ModelExceptionType(Enum, metaclass=GetItemEnum):
-  PARSING_ERROR = "MODEL_PARSING_ERROR"
-
+# TODO implement model exception
 class ModelException(BaseException):
-  def __init__(self, type:ModelExceptionType, description:str, module:str):
+  def __init__(self, description:str, module:str):
     super()
