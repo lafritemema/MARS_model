@@ -187,6 +187,12 @@ class Action:
     
     @classmethod
     def get_from_db(cls, action_id:str):
-        action = model.DB_DRIVER.find_by_id(action_id)
+        try:
+            action = model.DB_DRIVER.find_by_id(action_id)
         # MODIFGEN action = DB_DRIVER.find_by_id(action_id)
-        return cls.parse(action)
+            assert action, f'no action found with uid {action_id}'
+            return cls.parse(action)
+        except AssertionError:
+            return None
+
+            
